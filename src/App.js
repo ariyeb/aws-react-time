@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
+  const getTime = () => {
+    const now = new Date();
+    const houers = now.getHours().toString().padStart(2, "0");
+    const minutes = now.getMinutes().toString().padStart(2, "0");
+    const seconds = now.getSeconds().toString().padStart(2, "0");
+    return `${houers}:${minutes}:${seconds}`;
+  };
+
+  const [time, setTime] = useState(getTime());
+
+  useEffect(() => {
+    const timeInterval = setInterval(() => {
+      setTime(getTime());
+    }, 1000);
+
+    return () => {
+      clearInterval(timeInterval);
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Time</h1>
+      <h2>{ time }</h2>
     </div>
   );
 }
