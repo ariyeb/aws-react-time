@@ -24,7 +24,7 @@ function App() {
 
   return (
     <div>
-      <h1>Time</h1>
+      <h1>Time:</h1>
       <h2>{ time }</h2>
     </div>
   );
